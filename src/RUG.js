@@ -287,7 +287,7 @@ class RUG extends React.Component {
   }
 
   async getImageURLToBlob(file, images = []) {
-    const { rules, accept, acceptType } = this.props;
+    const { rules, accept } = this.props;
 
     images = images.concat(this.state.images);
 
@@ -304,7 +304,7 @@ class RUG extends React.Component {
     if (
       !isAccepted(
         file.type,
-        accept.map((type) => `${acceptType}/${type}`)
+        accept.map((type) => `${type}`)
       )
     ) {
       warning("accept");
@@ -332,7 +332,7 @@ class RUG extends React.Component {
         warning("size");
       }
 
-      if (acceptType === "image") {
+      if (file.type.toString().startsWith('image')) {
         /**
          * dimensions
          *
@@ -461,7 +461,7 @@ class RUG extends React.Component {
             type="file"
             ref={this.fileInput}
             className="rug-file-input"
-            accept={accept.map((type) => `${acceptType}/${type}`)}
+            accept={accept.map((type) => `${type}`)}
             onChange={(event) => this.uploadFiles(event.target.files)}
           />
         </div>

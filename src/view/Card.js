@@ -29,6 +29,13 @@ export default class Card extends React.Component {
       } = this.props,
       { spin } = this.state;
 
+    let tag = 'image';
+    if (source.toString().endsWith('.mp4')) {
+      tag = 'video';
+    }
+
+    const sourceParts =  source?.toString().split('.');
+
     return (
       <div
         {...props}
@@ -45,11 +52,22 @@ export default class Card extends React.Component {
           </div>
         )}
 
-        <div
+        {tag == 'image' && <div
           style={{ backgroundImage: `url(${source})` }}
           onClick={click}
           className="rug-card-image"
-        />
+        />}
+
+        {tag === 'video' && <div className='rug-card-image'>
+            <video controls style={{ maxWidth: '100000px',
+              inset: 0,
+              height: '100%',
+              width: '100%',
+              zIndex: 99999
+            }}>
+              <source src={source} type={`${tag}/${sourceParts[sourceParts.length - 1]}`} />
+            </video>
+          </div>}
 
         {!done && !error && uploading && (
           <>

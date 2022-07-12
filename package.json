@@ -23,6 +23,7 @@
   "scripts": {
     "start": "webpack --watch",
     "build": "rm -rf dist && babel src -d dist --copy-files && node-sass src/style.scss -o dist",
+    "build:windows": "babel src -d dist --copy-files && node-sass src/style.scss -o dist",
     "prettier": "onchange 'src/**/*.js' -- prettier --write {{changed}}"
   },
   "dependencies": {
